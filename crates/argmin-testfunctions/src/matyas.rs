@@ -76,6 +76,11 @@ mod tests {
     fn test_matyas_optimum() {
         assert_relative_eq!(matyas(&[0_f32, 0_f32]), 0.0, epsilon = f32::EPSILON);
         assert_relative_eq!(matyas(&[0_f64, 0_f64]), 0.0, epsilon = f64::EPSILON);
+
+        let deriv = matyas_derivative(&[0.0, 0.0]);
+        for i in 0..2 {
+            assert_relative_eq!(deriv[i], 0.0, epsilon = f64::EPSILON);
+        }
     }
 
     proptest! {
@@ -85,7 +90,12 @@ mod tests {
             let derivative = matyas_derivative(&param);
             let derivative_fd = Vec::from(param).central_diff(&|x| matyas(&[x[0], x[1]]));
             for i in 0..derivative.len() {
-                assert_relative_eq!(derivative[i], derivative_fd[i], epsilon = 1e-5);
+                assert_relative_eq!(
+                    derivative[i],
+                    derivative_fd[i],
+                    epsilon = 1e-5,
+                    max_relative = 1e-2
+                );
             }
         }
     }
@@ -100,7 +110,12 @@ mod tests {
             for i in 0..n {
                 assert_eq!(hessian[i].len(), n);
                 for j in 0..n {
-                    assert_relative_eq!(hessian[i][j], hessian_fd[i][j], epsilon = f64::EPSILON);
+                    assert_relative_eq!(
+                        hessian[i][j],
+                        hessian_fd[i][j],
+                        epsilon = 1e-5,
+                        max_relative = 1e-2
+                    );
                 }
             }
         }

@@ -1,6 +1,6 @@
 [package]
 name = "argmin_testfunctions"
-version = "0.1.1"
+version = "0.2.0"
 authors = ["Stefan Kroboth <stefan.kroboth@gmail.com>"]
 license = "MIT OR Apache-2.0"
 edition = "2021"
@@ -17,9 +17,14 @@ num = "0.4"
 
 [dev-dependencies]
 approx = "0.5"
+criterion = "0.5.1"
 finitediff = "0.1.4"
 paste = "1.0"
 proptest = "1.4.0"
 
 [badges]
 maintenance = { status = "actively-developed" }
+
+[[bench]]
+name = "testfunctions"
+harness = false
