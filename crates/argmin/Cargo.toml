@@ -22,7 +22,9 @@ num-traits = "0.2"
 rand = "0.8.5"
 rand_xoshiro = "0.6.0"
 thiserror = "1.0"
-argmin-math = { path = "../argmin-math", version = "0.4", default-features = false, features = ["primitives"] }
+argmin-math = { path = "../argmin-math", version = "0.4", default-features = false, features = [
+  "primitives",
+] }
 # optional
 ctrlc = { version = "3.2.4", features = ["termination"], optional = true }
 getrandom = { version = "0.2", optional = true }
@@ -31,7 +33,9 @@ serde = { version = "1.0", features = ["derive"], optional = true }
 
 [dev-dependencies]
 approx = "0.5.0"
-finitediff = { version = "0.1.4", path = "../finitediff", features = ["ndarray"] }
+finitediff = { version = "0.1.4", path = "../finitediff", features = [
+  "ndarray",
+] }
 argmin_testfunctions = { version = "0.2.0", path = "../argmin-testfunctions" }
 ndarray = { version = "0.15", features = ["serde-1"] }
 ndarray-linalg = { version = "0.16", features = ["intel-mkl-static"] }
@@ -45,6 +49,9 @@ default = []
 wasm-bindgen = ["instant/wasm-bindgen", "getrandom/js"]
 serde1 = ["serde", "rand_xoshiro/serde1"]
 _ndarrayl = ["argmin-math/ndarray_latest"]
+_ndarrayl_intel_mkl_static = ["argmin-math/ndarray_latest_intel_mkl_static"]
+_ndarrayl_openblas_static = ["argmin-math/ndarray_latest_openblas_static"]
+_ndarrayl_netlib_static = ["argmin-math/ndarray_latest_netlib_static"]
 # When adding new features, please consider adding them to either `full` (for users)
 # or `_full_dev` (only for local development, testing and computing test coverage).
 full = ["default", "serde1", "ctrlc"]
